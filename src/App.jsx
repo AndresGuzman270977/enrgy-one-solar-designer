@@ -302,12 +302,33 @@ export default function App() {
 
   const year = new Date().getFullYear();
 
+  // ✅ Credenciales (links únicos)
+  const LINKEDIN_URL = "https://www.linkedin.com/in/agv17";
+  const GITHUB_URL = "https://github.com/AndresGuzman270977";
+
   return (
     <div className="appShell">
       <div className="appHeader">
         <div className="headerBar">
           <div className="brand">
             <div className="brandTitle">ENRGY ONE • Solar Designer</div>
+
+            {/* ✅ Credenciales arriba (inicio) */}
+            <div className="brandSub">
+              <span>
+                {lang === "en" ? "Developed by" : "Desarrollada por"}{" "}
+                <strong>Andrés Guzmán Valencia</strong>
+              </span>
+              {" · "}
+              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" title="LinkedIn - Andrés Guzmán Valencia">
+                LinkedIn
+              </a>
+              {" · "}
+              <a href={GITHUB_URL} target="_blank" rel="noreferrer" title="GitHub - AndresGuzman270977">
+                GitHub
+              </a>
+            </div>
+
             <div className="brandSub">
               v2.0 — {lang === "en" ? (isEngineerUI ? "Engineer Mode" : "Amateur Mode") : `Modo ${uiModeLabel}`} •{" "}
               {lang === "en" ? "Technical inventory" : "Inventario técnico"} •{" "}
@@ -401,7 +422,7 @@ export default function App() {
           <Results data={safeShown} />
         </section>
 
-        {/* ✅ Footer de créditos (VISIBLE en web, no en print si luego lo ocultas) */}
+        {/* ✅ Footer de créditos */}
         <footer className="appFooter">
           <div className="footerContent">
             <div>© {year} ENRGY ONE · Solar Designer v2.0</div>
@@ -413,21 +434,11 @@ export default function App() {
             <div>Electrical Engineer · Renewable Energy Systems · Digital Grids</div>
 
             <div className="footerLinks">
-              <a
-                href="https://www.linkedin.com/in/TU_LINKEDIN"
-                target="_blank"
-                rel="noreferrer"
-                title="LinkedIn"
-              >
+              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" title="LinkedIn - Andrés Guzmán Valencia">
                 LinkedIn
               </a>
               {" · "}
-              <a
-                href="https://github.com/AndresGuzman270977"
-                target="_blank"
-                rel="noreferrer"
-                title="GitHub"
-              >
+              <a href={GITHUB_URL} target="_blank" rel="noreferrer" title="GitHub - AndresGuzman270977">
                 GitHub
               </a>
             </div>
