@@ -1,0 +1,633 @@
+/* src/App.css — Corporate Engineering Edition
+   Fondo claro técnico + texto negro + delineados sobrios
+   ========================================================= */
+
+/* =========================================================
+   Tokens
+   ========================================================= */
+:root {
+  /* base */
+  --bg: #f4f6f8;           /* gris técnico claro */
+  --surface: #ffffff;      /* tarjetas */
+  --surface2: #fbfcfe;     /* variación */
+  --text: #111111;         /* negro principal */
+  --muted: #444444;        /* secundario */
+  --muted2: #666666;       /* tertiary */
+  --line: #d1d5db;         /* borde gris sobrio */
+
+  /* acentos (sobrios) */
+  --accent: #2ecc71;       /* verde energía */
+  --accentHover: #27ae60;
+  --accent2: #0f4c81;      /* azul corporativo para links */
+
+  /* sombras suaves */
+  --shadow: 0 10px 28px rgba(17, 17, 17, 0.10);
+  --shadowSoft: 0 6px 18px rgba(17, 17, 17, 0.08);
+
+  /* focus ring */
+  --ring: 0 0 0 3px rgba(46, 204, 113, 0.22);
+
+  /* radios */
+  --r-lg: 18px;
+  --r-md: 14px;
+  --r-sm: 12px;
+}
+
+* { box-sizing: border-box; }
+
+/* ✅ Evita scroll horizontal fantasma (root) */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ✅ Asegura que hijos de grid/flex sí puedan encogerse */
+img, svg, canvas, video, pre, code {
+  max-width: 100%;
+}
+
+/* =========================================================
+   Fondo corporativo (limpio, imprimible)
+   ========================================================= */
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+
+  background:
+    radial-gradient(1100px 700px at 12% 8%, rgba(46, 204, 113, 0.10), transparent 60%),
+    radial-gradient(900px 600px at 88% 12%, rgba(15, 76, 129, 0.08), transparent 55%),
+    linear-gradient(to bottom, rgba(17,17,17,0.02), rgba(17,17,17,0.00) 40%),
+    var(--bg);
+
+  background-attachment: fixed;
+}
+
+/* =========================================================
+   Layout
+   ========================================================= */
+.appShell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px;
+
+  width: 100%;
+  min-width: 0;     /* ✅ clave */
+}
+
+.appHeader { margin-bottom: 14px; }
+
+.headerBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 14px 14px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface), var(--surface2));
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadowSoft);
+
+  position: relative;
+  overflow: hidden;
+  min-width: 0;     /* ✅ clave */
+}
+
+/* brillo sutil superior */
+.headerBar::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(900px 120px at 40% 0%, rgba(17,17,17,0.06), transparent 55%);
+  pointer-events: none;
+}
+
+/* contenedor brand */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;     /* ✅ clave */
+}
+
+.brandTitle {
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+.brandSub {
+  margin-top: 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.25;
+}
+
+.headerPills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;     /* ✅ clave */
+}
+
+/* =========================================================
+   Pills
+   ========================================================= */
+.pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.pillBtn {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.pillBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(17,17,17,0.35);
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(17,17,17,0.08);
+}
+.pillBtn:active { transform: translateY(0px); }
+.pillBtn:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-color: rgba(46, 204, 113, 0.55);
+}
+.pillBtnActive {
+  border-color: rgba(46, 204, 113, 0.70);
+  background: rgba(46, 204, 113, 0.10);
+  box-shadow: var(--ring);
+  color: var(--text);
+}
+.pillBtnDisabled,
+.pillBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   Stack layout
+   ========================================================= */
+.stackGrid {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;     /* ✅ clave */
+}
+
+.stackTop, .stackBottom {
+  width: 100%;
+  min-width: 0;     /* ✅ clave */
+}
+
+/* =========================================================
+   Cards (limpias y profesionales)
+   ========================================================= */
+.card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 14px;
+  box-shadow: var(--shadow);
+
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  min-width: 0;     /* ✅ clave */
+}
+
+/* brillo muy sutil para profundidad */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(800px 140px at 18% 0%, rgba(46,204,113,0.10), transparent 60%),
+    radial-gradient(800px 160px at 92% 10%, rgba(15,76,129,0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(46, 204, 113, 0.10);
+  border: 1px solid rgba(46, 204, 113, 0.35);
+  color: #0f5f35;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+h2 { margin: 8px 0 0; color: var(--text); }
+h3.section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+}
+
+.muted { color: var(--muted); }
+
+/* =========================================================
+   Grids
+   ========================================================= */
+.row { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0; /* ✅ */
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0; /* ✅ */
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted2);
+  margin-bottom: 6px;
+}
+
+/* =========================================================
+   Inputs / Selects
+   ========================================================= */
+input[type="text"],
+input[type="number"],
+.select {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+  min-width: 0; /* ✅ evita empuje en grids */
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+  color: rgba(17, 17, 17, 0.45);
+}
+
+input[type="text"]:hover,
+input[type="number"]:hover,
+.select:hover {
+  border-color: rgba(17,17,17,0.35);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+.select:focus {
+  border-color: rgba(46, 204, 113, 0.65);
+  box-shadow: var(--ring);
+}
+
+.select option {
+  background: #ffffff;
+  color: var(--text);
+}
+
+small { display:block; margin-top: 6px; color: var(--muted2); font-size: 12px; }
+
+/* Links */
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* =========================================================
+   Tabs
+   ========================================================= */
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
+
+.tab {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  cursor: pointer;
+  transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  max-width: 100%;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+  border-color: rgba(17,17,17,0.35);
+  background: #ffffff;
+  color: var(--text);
+  box-shadow: 0 10px 22px rgba(17,17,17,0.08);
+}
+
+.tab:active { transform: translateY(0); }
+
+.tab.active {
+  border-color: rgba(46, 204, 113, 0.70);
+  color: var(--text);
+  background: rgba(46, 204, 113, 0.10);
+  box-shadow: var(--ring);
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn, .btnPrimary {
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.08s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(17,17,17,0.35);
+  box-shadow: 0 10px 22px rgba(17,17,17,0.08);
+}
+
+.btn:active { transform: translateY(0); }
+
+.btnPrimary {
+  border-color: rgba(46, 204, 113, 0.70);
+  background: rgba(46, 204, 113, 0.12);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(46, 204, 113, 0.85);
+  background: rgba(46, 204, 113, 0.16);
+  box-shadow: 0 12px 26px rgba(46, 204, 113, 0.12);
+}
+
+.btnPrimary:active { transform: translateY(0); }
+
+.btn:disabled, .btnPrimary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   Notes
+   ========================================================= */
+.note {
+  border: 1px dashed rgba(17,17,17,0.22);
+  background: #ffffff;
+  border-radius: var(--r-md);
+  padding: 10px;
+  color: var(--muted);
+  min-width: 0;
+}
+
+/* =========================================================
+   Code UX (EngineerForm avanzado)
+   ========================================================= */
+.codeCard {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  border-radius: var(--r-md);
+  padding: 10px;
+
+  /* ✅ aquí sí permitimos overflow horizontal, pero solo dentro */
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ✅ El textarea ya NO debe forzar el layout */
+.codeArea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;          /* ✅ clave: ya no empuja a la derecha */
+  min-height: 420px;
+
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  border-radius: var(--r-sm);
+  padding: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.45;
+  outline: none;
+  resize: vertical;
+
+  /* ✅ si el contenido es largo, el scroll ocurre en el textarea, no en la página */
+  overflow: auto;
+  white-space: pre;
+  word-break: normal;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.codeArea:focus {
+  border-color: rgba(46, 204, 113, 0.65);
+  box-shadow: var(--ring);
+}
+
+/* =========================================================
+   KPIs
+   ========================================================= */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  min-width: 0;
+}
+
+.kpiCard {
+  border: 1px solid var(--line);
+  background: #ffffff;
+  border-radius: var(--r-md);
+  padding: 10px;
+  box-shadow: var(--shadowSoft);
+  min-width: 0;
+}
+
+.kpiLabel { font-size: 12px; color: var(--muted2); }
+.kpiValue { font-size: 18px; font-weight: 900; margin-top: 6px; color: var(--text); }
+.kpiSub { margin-top: 6px; font-size: 12px; color: var(--muted); }
+
+/* =========================================================
+   Table
+   ========================================================= */
+.tableWrap {
+  overflow: auto;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  max-width: 100%;
+  background: #ffffff;
+  min-width: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px; /* ✅ la tabla scrollea dentro de tableWrap */
+  background: #ffffff;
+}
+
+.table th, .table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(17,17,17,0.10);
+  vertical-align: top;
+}
+
+.table th {
+  text-align: left;
+  font-size: 12px;
+  color: var(--muted2);
+  font-weight: 800;
+  background: rgba(17,17,17,0.03);
+}
+
+.table td { font-size: 13px; color: var(--text); }
+
+.table tr:hover td {
+  background: rgba(46, 204, 113, 0.06);
+}
+
+/* =========================================================
+   Scrollbar
+   ========================================================= */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: rgba(17,17,17,0.06); }
+::-webkit-scrollbar-thumb { background: rgba(17,17,17,0.22); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(17,17,17,0.32); }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 1100px) {
+  .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpiGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .headerBar { flex-wrap: wrap; }
+  .brand { width: 100%; }
+}
+
+@media (max-width: 980px) {
+  .grid3 { grid-template-columns: 1fr; }
+  .grid2 { grid-template-columns: 1fr; }
+  .kpiGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* =========================================================
+   ✅ PRINT FIX GLOBAL (para reportes largos)
+   - Quita overflow que recorta
+   - Quita sombras
+   - Evita que background fixed afecte impresión
+   ========================================================= */
+@media print {
+  /* Página */
+  @page { size: A4; margin: 12mm; }
+
+  html, body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Importante: background-attachment fixed rompe multipágina en algunos browsers */
+  body { background-attachment: scroll !important; }
+
+  /* Ocultar header y controles (Results.jsx ya lo intenta, esto es backup) */
+  .appHeader,
+  .headerBar,
+  .headerPills,
+  .pillBtn,
+  .btn,
+  .btnPrimary {
+    display: none !important;
+  }
+
+  /* Contenedores sin recorte */
+  .appShell,
+  .stackGrid,
+  .stackTop,
+  .stackBottom,
+  .card {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* La card en print NO debe tener overflow hidden ni sombras */
+  .card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .card::before { display: none !important; }
+
+  /* Notas y KPIs sin sombras */
+  .note, .kpiCard, .headerBar {
+    box-shadow: none !important;
+  }
+
+  /* Tablas: que fluyan y partan bien */
+  .tableWrap {
+    overflow: visible !important;    /* ✅ clave (si no, recorta) */
+    border: none !important;
+  }
+
+  table.table {
+    width: 100% !important;
+    min-width: 0 !important;         /* ✅ que no fuerce ancho absurdo en print */
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    font-size: 11.5px !important;
+  }
+
+  table.table thead { display: table-header-group !important; }
+  table.table tfoot { display: table-footer-group !important; }
+
+  table.table th,
+  table.table td {
+    border: 1px solid #9a9a9a !important;
+    padding: 6px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  table.table th {
+    background: #f0f0f0 !important;
+  }
+
+  tr { page-break-inside: avoid !important; }
+  h2, h3 { page-break-after: avoid !important; }
+
+  /* KPI grid más compacto en impresión */
+  .kpiGrid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}

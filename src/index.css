@@ -1,0 +1,183 @@
+/* =========================================================
+   src/index.css
+   Base estable y neutral (Corporate Engineering Edition)
+   Fondo claro + texto negro + delineados sobrios
+   ========================================================= */
+
+/* ---------- Variables base ---------- */
+:root {
+  /* Tipografía base */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* ✅ Modo claro para evitar blanco/blanco en componentes */
+  color-scheme: light;
+
+  /* Base corporativa */
+  --bg-base: #f4f6f8;          /* gris técnico claro */
+  --text-base: #111111;        /* negro principal */
+  --muted-base: #444444;       /* texto secundario */
+
+  --link-base: #0f4c81;        /* azul sobrio */
+  --link-hover: #0b3a61;
+
+  /* Selección de texto */
+  --selection-bg: rgba(46, 204, 113, 0.25); /* verde energía suave */
+  --selection-text: #111111;
+}
+
+/* ---------- Reset básico ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Root containers ---------- */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* ---------- Body ---------- */
+body {
+  margin: 0;
+
+  /* No centrar la app */
+  display: block;
+
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--bg-base);
+  color: var(--text-base);
+
+  overflow-x: hidden;
+}
+
+/* ---------- Links ---------- */
+a {
+  font-weight: 600;
+  color: var(--link-base);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ---------- Botones base ---------- */
+button {
+  font-family: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+/* ---------- Inputs base (fallback) ---------- */
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* ---------- Scrollbar (clara y sobria) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(17, 17, 17, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(17, 17, 17, 0.22);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(17, 17, 17, 0.32);
+}
+
+/* ---------- Selección de texto ---------- */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* =========================================================
+   PRINT FIX — MULTI PAGE ENGINEERING REPORT
+   Evita que el reporte se imprima en una sola hoja
+   ========================================================= */
+
+@media print {
+
+  /* Permitir crecimiento vertical completo */
+  html,
+  body,
+  #root {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  body {
+    min-height: auto !important; /* anula 100vh */
+    overflow-x: visible !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  :root {
+    color-scheme: light !important;
+  }
+
+  /* Neutralizar posibles wrappers del layout */
+  .app,
+  .stackTop,
+  .stackBottom,
+  .card,
+  .tableWrap {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Tablas largas */
+  table {
+    page-break-inside: auto !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  /* Secciones importantes no deben partir mal */
+  h2, h3 {
+    page-break-after: avoid !important;
+  }
+
+  /* Márgenes de página */
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+}
