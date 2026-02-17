@@ -300,6 +300,8 @@ export default function App() {
   const uiModeLabel = isEngineerUI ? TT("results.engineer", "INGENIERO") : TT("results.amateur", "AMATEUR");
   const resultLabel = isEngineerResultShown ? TT("results.engineer", "ENGINEER") : TT("results.amateur", "AMATEUR");
 
+  const year = new Date().getFullYear();
+
   return (
     <div className="appShell">
       <div className="appHeader">
@@ -398,6 +400,39 @@ export default function App() {
           {/* ✅ Results SOLO recibe el resultado del modo actual */}
           <Results data={safeShown} />
         </section>
+
+        {/* ✅ Footer de créditos (VISIBLE en web, no en print si luego lo ocultas) */}
+        <footer className="appFooter">
+          <div className="footerContent">
+            <div>© {year} ENRGY ONE · Solar Designer v2.0</div>
+
+            <div className="footerAuthor">
+              Developed and Architected by <strong>Andrés Guzmán Valencia</strong>
+            </div>
+
+            <div>Electrical Engineer · Renewable Energy Systems · Digital Grids</div>
+
+            <div className="footerLinks">
+              <a
+                href="https://www.linkedin.com/in/TU_LINKEDIN"
+                target="_blank"
+                rel="noreferrer"
+                title="LinkedIn"
+              >
+                LinkedIn
+              </a>
+              {" · "}
+              <a
+                href="https://github.com/AndresGuzman270977"
+                target="_blank"
+                rel="noreferrer"
+                title="GitHub"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

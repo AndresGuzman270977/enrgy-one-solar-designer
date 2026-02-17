@@ -514,6 +514,59 @@ a:hover { text-decoration: underline; }
 }
 
 /* =========================================================
+   ✅ Footer credits (autoría / branding)
+   ========================================================= */
+.appFooter {
+  width: 100%;
+  min-width: 0;
+  margin-top: 8px;
+  padding: 12px 14px;
+
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, var(--surface), var(--surface2));
+  box-shadow: var(--shadowSoft);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.appFooter::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(900px 160px at 18% 0%, rgba(46,204,113,0.08), transparent 60%),
+    radial-gradient(900px 160px at 92% 10%, rgba(15,76,129,0.06), transparent 60%);
+  pointer-events: none;
+}
+
+.footerContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 6px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.footerAuthor {
+  color: var(--text);
+  font-size: 12.5px;
+}
+
+.footerLinks a {
+  font-weight: 800;
+  color: var(--accent2);
+  text-decoration: none;
+}
+.footerLinks a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
    Scrollbar
    ========================================================= */
 ::-webkit-scrollbar { width: 10px; }
@@ -567,6 +620,11 @@ a:hover { text-decoration: underline; }
   .pillBtn,
   .btn,
   .btnPrimary {
+    display: none !important;
+  }
+
+  /* ✅ Ocultar footer (créditos) en impresión */
+  .appFooter {
     display: none !important;
   }
 
